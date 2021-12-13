@@ -1,5 +1,8 @@
 import org.apache.commons.io.IOUtils;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.*;
 
 public class Main {
@@ -11,18 +14,46 @@ public class Main {
     }
 
     public String patternFinder(String result) throws Exception {
-        String grocerylist = "complete";
-        int counter = 0;
-        Pattern pattern = Pattern.compile("milk", Pattern.CASE_INSENSITIVE);
-        Matcher match = pattern.matcher(result);
+        int milkCount = 0;
+        int breadCount = 0;
+        int cookieCount = 0;
+        int appleCount = 0;
+        Map<String, Integer> groceryList = new HashMap<String, Integer>();
+        Pattern pattern1 = Pattern.compile("milk", Pattern.CASE_INSENSITIVE);
+        Pattern pattern2 = Pattern.compile("bread", Pattern.CASE_INSENSITIVE);
+        Pattern pattern3 = Pattern.compile("cookies", Pattern.CASE_INSENSITIVE);
+        Pattern pattern4 = Pattern.compile("apples", Pattern.CASE_INSENSITIVE);
+        Matcher matchP1 = pattern1.matcher(result);
+        Matcher matchP2 = pattern2.matcher(result);
+        Matcher matchP3 = pattern3.matcher(result);
+        Matcher matchP4 = pattern4.matcher(result);
 
-        while(match.find()) {
-            counter++;
-            System.out.println("Match no:" + counter);
-            System.out.println("Found at: " + match.start() + " - " + match.end());
+        while(matchP1.find()) {
+            milkCount++;
         }
 
-        return grocerylist;
+        while(matchP2.find()) {
+            breadCount++;
+        }
+
+        while(matchP3.find()) {
+            cookieCount++;
+        }
+
+        while(matchP4.find()) {
+            appleCount++;
+        }
+
+        groceryList.put("milk", milkCount);
+        groceryList.put("bread", breadCount);
+        groceryList.put("cookies", cookieCount);
+        groceryList.put("apples", appleCount);
+
+        for (String key : groceryList.keySet()) {
+            System.out.println("name: " + key + " \t\t seen: " + groceryList.get(key) + " times");
+        }
+
+        return null;
     }
 
     public static void main(String[] args) throws Exception {
