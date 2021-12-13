@@ -14,10 +14,7 @@ public class Main {
     }
 
     public String patternFinder(String result) throws Exception {
-        int milkCount = 0;
-        int breadCount = 0;
-        int cookieCount = 0;
-        int appleCount = 0;
+        int counter = 0;
         Map<String, Integer> groceryList = new HashMap<String, Integer>();
         Pattern pattern1 = Pattern.compile("milk", Pattern.CASE_INSENSITIVE);
         Pattern pattern2 = Pattern.compile("bread", Pattern.CASE_INSENSITIVE);
@@ -29,25 +26,27 @@ public class Main {
         Matcher matchP4 = pattern4.matcher(result);
 
         while(matchP1.find()) {
-            milkCount++;
+            counter++;
         }
+        groceryList.put("Milk", counter);
+        counter = 0;
 
         while(matchP2.find()) {
-            breadCount++;
+            counter++;
         }
+        groceryList.put("Bread", counter);
+        counter = 0;
 
         while(matchP3.find()) {
-            cookieCount++;
+            counter++;
         }
+        groceryList.put("Cookies", counter);
+        counter = 0;
 
         while(matchP4.find()) {
-            appleCount++;
+            counter++;
         }
-
-        groceryList.put("milk", milkCount);
-        groceryList.put("bread", breadCount);
-        groceryList.put("cookies", cookieCount);
-        groceryList.put("apples", appleCount);
+        groceryList.put("Apples", counter);
 
         for (String key : groceryList.keySet()) {
             System.out.println("name: " + key + " \t\t seen: " + groceryList.get(key) + " times");
