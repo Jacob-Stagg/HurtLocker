@@ -50,9 +50,13 @@ public class Main {
 
         for (String key : groceryList.keySet()) {
             System.out.println("name: " + key + " \t\t seen: " + groceryList.get(key) + " times");
+            System.out.println("=============\t\t =============");
+            System.out.println("Price: " + "0.00" + " \t\t seen: " + 0 + " times");
+            System.out.println("-------------\t\t -------------");
+            System.out.println();
         }
 
-        return null;
+        return "";
     }
 
     public static void main(String[] args) throws Exception {
