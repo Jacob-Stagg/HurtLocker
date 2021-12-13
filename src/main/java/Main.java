@@ -1,52 +1,52 @@
 import org.apache.commons.io.IOUtils;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.*;
 
 public class Main {
 
     public String readRawDataToString() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        String result = IOUtils.toString(classLoader.getResourceAsStream("RawData.txt"));
-        return result;
+        return IOUtils.toString(classLoader.getResourceAsStream("RawData.txt"));
     }
 
-    public String patternFinder(String result) throws Exception {
-        int counter = 0;
+    public String patternFinder(String result) {
+        int groceryCounter = 0;
+
         Map<String, Integer> groceryList = new HashMap<String, Integer>();
-        Pattern pattern1 = Pattern.compile("milk", Pattern.CASE_INSENSITIVE);
-        Pattern pattern2 = Pattern.compile("bread", Pattern.CASE_INSENSITIVE);
-        Pattern pattern3 = Pattern.compile("cookies", Pattern.CASE_INSENSITIVE);
-        Pattern pattern4 = Pattern.compile("apples", Pattern.CASE_INSENSITIVE);
-        Matcher matchP1 = pattern1.matcher(result);
-        Matcher matchP2 = pattern2.matcher(result);
-        Matcher matchP3 = pattern3.matcher(result);
-        Matcher matchP4 = pattern4.matcher(result);
 
-        while(matchP1.find()) {
-            counter++;
-        }
-        groceryList.put("Milk", counter);
-        counter = 0;
+        Pattern milk = Pattern.compile("milk", Pattern.CASE_INSENSITIVE);
+        Pattern bread = Pattern.compile("bread", Pattern.CASE_INSENSITIVE);
+        Pattern cookies = Pattern.compile("cookies", Pattern.CASE_INSENSITIVE);
+        Pattern apples = Pattern.compile("apples", Pattern.CASE_INSENSITIVE);
 
-        while(matchP2.find()) {
-            counter++;
-        }
-        groceryList.put("Bread", counter);
-        counter = 0;
+        Matcher matchMilk = milk.matcher(result);
+        Matcher matchBread = bread.matcher(result);
+        Matcher matchCookies = cookies.matcher(result);
+        Matcher matchApples = apples.matcher(result);
 
-        while(matchP3.find()) {
-            counter++;
+        while(matchMilk.find()) {
+            groceryCounter++;
         }
-        groceryList.put("Cookies", counter);
-        counter = 0;
+        groceryList.put("Milk", groceryCounter);
+        groceryCounter = 0;
 
-        while(matchP4.find()) {
-            counter++;
+        while(matchBread.find()) {
+            groceryCounter++;
         }
-        groceryList.put("Apples", counter);
+        groceryList.put("Bread", groceryCounter);
+        groceryCounter = 0;
+
+        while(matchCookies.find()) {
+            groceryCounter++;
+        }
+        groceryList.put("Cookies", groceryCounter);
+        groceryCounter = 0;
+
+        while(matchApples.find()) {
+            groceryCounter++;
+        }
+        groceryList.put("Apples", groceryCounter);
 
         for (String key : groceryList.keySet()) {
             System.out.println("name: " + key + " \t\t seen: " + groceryList.get(key) + " times");
